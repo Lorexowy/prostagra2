@@ -17,11 +17,8 @@
                     <li>Zagadki rozwiązujemy grupowo, współpracujemy.</li>
                     <li>Nie można kontaktować się z Kubą ani super totalnym koksem Miszelem.</li>
                     <li>Można korzystać z internetu i z telefonu.</li>
-                    <li>Jeżeli pytanie jest bezpośrednio związane z Tobą, nie możesz na nie odpowiedzieć</li>
-                    <li>Polecam zapisywać już odgadnięte hasła</li>
-                    <li>Czytajcie dokładnie dialogi</li>
                     <li>Wszystkie odpowiedzi oraz zagadki są związane z naszą grupką znajomych, ludźmi których znamy oraz znanymi nam miejscami.</li>
-                    <li>Prosze się dobrze się bawić :)</li>
+                    <li>Dobrze się bawić :)</li>
                 </ol>
             </div>
             <button id="startGameButton" onclick="startGame()">Rozpocznij grę</button>
@@ -62,7 +59,7 @@
 
         <!-- Etap 6 -->
         <div id="stage6" class="stage" style="display: none;">
-            <p id="narrator6">Dobra napisze do niego sms… Tylko co napisać żeby zwrócić jego uwagę?</p>
+            <p id="narrator6">Dobra napisze do niego sms… Tylko co napisać?</p>
             <button onclick="checkMessage('incorrect1')">Siema kurwo, Max verstappen to totalny zjeb</button>
             <button onclick="checkMessage('incorrect2')">Robisz siostrzenice, że tak nie odpisujesz?</button>
             <button onclick="checkMessage('correct')">Siemanko, wiesz może co z Saschą?</button>
@@ -110,7 +107,7 @@
         <div id="stage11" class="stage" style="display: none;">
             <p id="narrator12">Pukasz w okienko, na co Ziop natychmiast otwiera i mówi:</p>
             <p>- Siemaa, ej stary myślisz, że Suder jest naturalem?</p>
-            <input type="text" id="input6" placeholder="Wpisz hasło">
+            <input type="text" id="input6" placeholder="Wpisz odpowiedź">
             <button onclick="checkAnswer1()">Submit</button>
         </div>
 
@@ -223,13 +220,12 @@
 
         <!-- Etap 23 -->
         <div id="stage23" class="stage" style="display: none;">
-            <p>Musisz znaleźć telefon Saschy w mieszkaniu Kuby. Masz na to 2 minuty inaczej przyjedzie ochrona i możesz pakować się do więzienia. Prawdopodobnie trzyma go w jakimś oczywistym miejscu…</p>
-            <button onclick="startTimer()">Kontynuuj</button>
+            <p>Musisz znaleźć telefon Saschy w mieszkaniu Kuby. Niestety jeżeli długo będziesz mu oporządzał mieszkanie możesz pakować się do więzienia bo sąsiedzi zadzwonią po Wojta. Możesz pomylić się tylko 5 razy. Prawdopodobnie trzyma go w jakimś oczywistym miejscu… </p>
+            <button onclick="startSearch()">Kontynuuj</button>
         </div>
 
         <!-- Etap 24 -->
         <div id="stage24" class="stage" style="display: none;">
-            <div id="timer">2:00</div>
             <button onclick="goStraight()">Idź prosto</button>
             <button onclick="exitApartment()">Wyjdź z mieszkania</button>
         </div>
@@ -289,12 +285,12 @@
         <!-- Etap 31 (Znaleziona kartka) -->
         <div id="note-stage" class="stage" style="display: none;">
             <p>Co to za kartka co tutaj jest napisane…</p>
-            <button onclick="continueToStage32()">Kontynuuj</button>
+            <button onclick="continueToNextStage()">Kontynuuj</button>
         </div>
 
         <!-- Etap 32 -->
         <div id="stage32" class="stage" style="display: none;">
-            <p>Cholera to jakaś kartka, ale co tutaj jest napisane...</p>
+            <p>Cholera to jakaś kartka, ale co tutaj jest napisane…</p>
             <button onclick="continueToStage34()">Kontynuuj</button>
         </div>
 
@@ -303,14 +299,15 @@
             <p>Na kartce napisane jest:</p>
             <p>pxvlvc nrqlhfcqlh xgdf vlh gr ndfsud ndfcrud</p>
             <input type="text" id="input8" placeholder="Wpisz hasło">
-            <button onclick="checkPassword5()">Submit</button>
-            <button onclick="showHint3()">Podpowiedź</button>
-            <p id="hint3" class="hint" style="display: none;"></p>
+            <button onclick="checkFinalPassword()">Submit</button>
+            <button id="hintButton2" onclick="showHint3()">Podpowiedź</button>
+            <p id="hint3" class="hint" style="display: none;">przecież to jest kompletnie bez sensu</p>
+            <p id="hint4" class="hint" style="display: none;"></p>
         </div>
 
-        <!-- Koniec gry -->
-        <div id="end-stage" class="stage" style="display: none;">
-            <p>Trzecia część nadchodzi...</p>
+        <!-- Etap końcowy -->
+        <div id="final-stage" class="stage" style="display: none;">
+            <p>Trzecia część nadchodzi…</p>
             <button onclick="endGame()">Koniec gry, brawo</button>
         </div>
     </div>

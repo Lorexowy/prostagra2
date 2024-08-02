@@ -289,27 +289,13 @@ function continueToStage23() {
     document.getElementById('stage23').style.display = 'block';
 }
 
-// Funkcja uruchamiająca timer na 2 minuty w etapie 23
-function startTimer() {
-    let timeLeft = 120; // 2 minuty w sekundach
-    const timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            showNotification('Czas się skończył! Ochrona nadchodzi!', 'error');
-            setTimeout(() => {
-                location.reload();
-            }, 4000); // 4-sekundowe opóźnienie przed zakończeniem gry
-        } else {
-            timeLeft--;
-            // Wyświetl aktualny czas w formacie MM:SS
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-        }
-    }, 1000); // Odliczanie co sekundę
+// Funkcja uruchamiająca wyszukiwanie telefonu Saschy
+function startSearch() {
     document.getElementById('stage23').style.display = 'none';
     document.getElementById('stage24').style.display = 'block';
 }
+
+let searchMistakes = 0; // Licznik błędów podczas szukania telefonu
 
 // Funkcja obsługująca wyjście z mieszkania
 function exitApartment() {
@@ -352,44 +338,44 @@ function returnToMiddle() {
 // Funkcja obsługująca salon Japka
 function checkTVCabinet() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkSofa() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkBehindTV() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkUnderTable() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 // Funkcja obsługująca biuro Japka
 function checkDesk() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkBookshelf() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkPiano() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 // Funkcja obsługująca kuchnię Japka
 function checkFridge() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkCabinets() {
@@ -399,12 +385,12 @@ function checkCabinets() {
 
 function checkTable() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkCounter() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 // Funkcja powrotu do kuchni
@@ -421,38 +407,27 @@ function checkCabinet1() {
 
 function checkCabinet2() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
 function checkCabinet3() {
     showNotification('Nie znaleziono telefonu.', 'error');
-    deductTime(10);
+    handleSearchMistake();
 }
 
-// Funkcja odejmująca czas
-function deductTime(seconds) {
-    let timeLeft = parseInt(document.getElementById('timer').textContent.split(':').reduce((acc, time) => (60 * acc) + +time));
-    timeLeft -= seconds;
-    if (timeLeft <= 0) {
-        showNotification('Czas się skończył! Ochrona nadchodzi!', 'error');
+// Funkcja obsługująca błędy podczas szukania telefonu
+function handleSearchMistake() {
+    searchMistakes++;
+    if (searchMistakes >= 5) {
+        showNotification('Gra zakończona! Przekroczyłeś limit błędnych odpowiedzi.', 'error');
         setTimeout(() => {
             location.reload();
-        }, 4000);
-    } else {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        }, 4000); // 4-sekundowe opóźnienie przed zakończeniem gry
     }
 }
 
 // Funkcja przechodząca do następnego etapu po znalezieniu kartki
 function continueToNextStage() {
-    document.getElementById('note-stage').style.display = 'none';
-    document.getElementById('stage24').style.display = 'block';
-}
-
-// Funkcja przechodząca do etapu 32
-function continueToStage32() {
     document.getElementById('note-stage').style.display = 'none';
     document.getElementById('stage32').style.display = 'block';
 }
@@ -463,32 +438,29 @@ function continueToStage34() {
     document.getElementById('stage34').style.display = 'block';
 }
 
-// Funkcja sprawdzająca hasło w etapie 34
-function checkPassword5() {
+// Funkcja sprawdzająca końcowe hasło
+function checkFinalPassword() {
     const input = document.getElementById('input8').value;
     if (input.toLowerCase() === 'jutrzyńska 10') {
         document.getElementById('stage34').style.display = 'none';
-        document.getElementById('end-stage').style.display = 'block';
+        document.getElementById('final-stage').style.display = 'block';
     } else {
         showNotification('Niepoprawne hasło. Spróbuj ponownie.', 'error');
     }
 }
 
-let hintIndex = 0;
-const hints = ["przecież to jest kompletnie bez sensu", "mniej niż 5", "więcej niż 2", "abcdefghijklmnopqrstuvwxyz"];
-
 // Funkcja wyświetlająca podpowiedzi w etapie 34
 function showHint3() {
-    const hint = document.getElementById('hint3');
-    hint.style.display = 'block';
-    hint.textContent = hints[hintIndex];
-    hintIndex = (hintIndex + 1) % hints.length;
+    const hint3 = document.getElementById('hint3');
+    const hint4 = document.getElementById('hint4');
+    hint3.style.display = 'block';
+    setTimeout(() => { hint4.textContent = 'mniej niż 5'; }, 60000);
+    setTimeout(() => { hint4.textContent += ', więcej niż 2'; }, 120000);
+    setTimeout(() => { hint4.textContent += ', abcdefghijklmnopqrstuvwxyz'; }, 180000);
 }
 
 // Funkcja kończąca grę
 function endGame() {
-    showNotification('Gratulacje! Ukończyłeś grę.', 'success');
-    setTimeout(() => {
-        location.reload();
-    }, 4000); // 4-sekundowe opóźnienie przed zakończeniem gry
+    alert('Brawo! Ukończyłeś grę!');
+    location.reload();
 }
