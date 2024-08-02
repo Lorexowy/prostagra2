@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Sascha 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Ekran początkowy -->
+        <div id="start-screen" class="stage">
+            <h1>SAVE SASCHA 2</h1>
+            <div class="rules">
+                <h2>Zasady:</h2>
+                <ol>
+                    <li>Zagadki rozwiązujemy grupowo, współpracujemy.</li>
+                    <li>Nie można kontaktować się z Kubą ani super totalnym koksem Miszelem.</li>
+                    <li>Można korzystać z internetu i z telefonu.</li>
+                    <li>Jeżeli pytanie jest bezpośrednio związane z Tobą, nie możesz na nie odpowiedzieć</li>
+                    <li>Polecam zapisywać już odgadnięte hasła</li>
+                    <li>Czytajcie dokładnie dialogi</li>
+                    <li>Wszystkie odpowiedzi oraz zagadki są związane z naszą grupką znajomych, ludźmi których znamy oraz znanymi nam miejscami.</li>
+                    <li>Prosze się dobrze się bawić :)</li>
+                </ol>
+            </div>
+            <button id="startGameButton" onclick="startGame()">Rozpocznij grę</button>
+        </div>
+
+        <!-- Etap 1 -->
+        <div id="stage1" class="stage" style="display: none;">
+            <p id="narrator1">Dobrze, że pozwoliłeś Saschy napić się piwka, dzięki temu wasza przyjaźń tylko się pogłębiła. Dzisiaj wszyscy siedzimy sobie na discordziku, gramy w lolka i jest po prostu w porządku. Nie ma problemów, nie ma zmartwień..</p>
+            <button onclick="continueToStage2()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 2 -->
+        <div id="stage2" class="stage" style="display: none;">
+            <p id="narrator2">Impreza trwała w najlepsze. Jednak Sascha około godziny 4 stwierdził, że on już chce wrócić do domu. Wrócił z Matim Uberem. Od tamtej pory słuch o nim zaginął..</p>
+            <button onclick="continueToStage3()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 3 -->
+        <div id="stage3" class="stage" style="display: none;">
+            <p id="narrator3">Byłeś dzisiaj umówiony z Saschą na siłkę, ale nie przyszedł. Możliwe, że speniał bo jest małą cipeczką, ale podejrzewasz, że coś się mogło stać… Z kim on wracał tym uberem…</p>
+            <input type="text" id="input1" placeholder="Wpisz hasło">
+            <button onclick="checkPassword1()">Submit</button>
+        </div>
+
+        <!-- Etap 4 -->
+        <div id="stage4" class="stage" style="display: none;">
+            <p id="narrator4">Cholera nie mam zapisanego numeru do Michela, jaki on był...</p>
+            <input type="text" id="phoneInput" placeholder="Wpisz numer telefonu">
+            <button onclick="checkPhoneNumber()">Submit</button>
+        </div>
+
+        <!-- Etap 5 -->
+        <div id="stage5" class="stage" style="display: none;">
+            <p id="narrator5">Kurde Michel nie odbiera. Co on może teraz robić? Jest niedziela, 28 lipca, godzina 15:00…</p>
+            <input type="text" id="input2" placeholder="Wpisz hasło">
+            <button onclick="checkPassword2()">Submit</button>
+        </div>
+
+        <!-- Etap 6 -->
+        <div id="stage6" class="stage" style="display: none;">
+            <p id="narrator6">Dobra napisze do niego sms… Tylko co napisać żeby zwrócić jego uwagę?</p>
+            <button onclick="checkMessage('incorrect1')">Siema kurwo, Max verstappen to totalny zjeb</button>
+            <button onclick="checkMessage('incorrect2')">Robisz siostrzenice, że tak nie odpisujesz?</button>
+            <button onclick="checkMessage('correct')">Siemanko, wiesz może co z Saschą?</button>
+        </div>
+
+        <!-- Etap 7 -->
+        <div id="stage7" class="stage" style="display: none;">
+            <p id="narrator7">Siemanko, wiesz może co z Saschą?</p>
+            <p id="narrator8">Siema, czekaj bo oglądam wyścig mam nadzieję, że wygra Max.</p>
+            <p id="narrator9">Dobra nie oglądaj bo i tak wygra….</p>
+            <input type="text" id="input3" placeholder="Wpisz hasło">
+            <button onclick="checkPassword3()">Submit</button>
+        </div>
+
+        <!-- Etap 8 -->
+        <div id="stage8" class="stage" style="display: none;">
+            <audio controls>
+                <source src="nagranie.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="password-section">
+                <label for="input4">Hasło:</label>
+                <input type="text" id="input4" placeholder="Wpisz hasło">
+            </div>
+            <button onclick="checkPassword4()">Submit</button>
+        </div>
+
+        <!-- Nowe etapy -->
+        <!-- Etap 9 -->
+        <div id="stage9" class="stage" style="display: none;">
+            <p id="narrator10">Chcesz zadzwonić do Ziombera, ale z jakiegoś powodu do niego również nie masz numeru. Na szczęście wychodząc z siłowni poczułeś gryzący zapach spalonej gumy i starte klocki hamulcowe. Zamykasz oczy, wytężasz węch..</p>
+            <button onclick="continueToStage10()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 10 -->
+        <div id="stage10" class="stage" style="display: none;">
+            <p id="narrator11">To Ziomber kopie właśnie sprzęgło przed Fitness Platinium na Solvayu. To na pewno jego auto, bo rejestracja to:</p>
+            <input type="text" id="input5" placeholder="Wpisz hasło">
+            <button onclick="checkRegistration()">Submit</button>
+            <button id="hintButton" onclick="showHint()">Podpowiedź</button>
+            <p id="hint" class="hint" style="display: none;">Chodzą plotki, że podczas przejazdu Ziombera pod Platinium, ten nie użył kierunkowskazu ani razu.</p>
+        </div>
+
+        <!-- Etap 11 -->
+        <div id="stage11" class="stage" style="display: none;">
+            <p id="narrator12">Pukasz w okienko, na co Ziop natychmiast otwiera i mówi:</p>
+            <p>- Siemaa, ej stary myślisz, że Suder jest naturalem?</p>
+            <input type="text" id="input6" placeholder="Wpisz hasło">
+            <button onclick="checkAnswer1()">Submit</button>
+        </div>
+
+        <!-- Etap 12 -->
+        <div id="stage12" class="stage" style="display: none;">
+            <p id="narrator13">No dobra, ale masz na to jakiś dowód?</p>
+            <p>Podaj dowód:</p>
+            <input type="text" id="input7" placeholder="Wpisz hasło">
+            <button onclick="checkAnswer2()">Submit</button>
+        </div>
+
+        <!-- Etap 13 -->
+        <div id="stage13" class="stage" style="display: none;">
+            <p>Ziomber: -W sumie racja, zapomniałem o tym filmie</p>
+            <p>Ty: -Stary, wiesz może gdzie jest Sascha? Nie przyszedł na siłkę dzisiaj…</p>
+            <p>Ziomber: -Ty to weź zadzwoń do Japka, on mi dzisiaj rano mówił, że ktoś zostawił u niego telefon. Ja go pytam chłopie a jak on wygląda? A on na to, że no ma taką gigantyczną pionową kreskę na środku ekranu. No to ja mu mówię, może to Saschy?</p>
+            <button onclick="continueToStage14()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 14 -->
+        <div id="stage14" class="stage" style="display: none;">
+            <p>-Myślę, że tak. Sascha lubi takie wymyślne designerskie telefony.</p>
+            <p>-To może tam czegoś się dowiesz? Może Sascha wrócił do Japka na klina i po telefon.</p>
+            <button onclick="handleChoice('car')">A mógłbyś mnie w sumie podwieźć do Japka?</button>
+            <button onclick="handleChoice('public')">Chuj w to, jadę komunikacją</button>
+            <button onclick="handleChoice('quit')">Pierdolę to, nie chce mi się ratować Saschy</button>
+        </div>
+
+        <!-- Etap 15 (Sidequest) -->
+        <div id="stage15" class="stage" style="display: none;">
+            <p>Ziomber: -A mógłbyś mnie w sumie podwieźć do Japka</p>
+            <p>Ty: -Nie no, ja teraz idę pompować stary.</p>
+            <button onclick="continueToStage16()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 16 -->
+        <div id="stage16" class="stage" style="display: none;">
+            <p>Ty: -A mógłbym pożyczyć twoją furę i przywiozę ci ją za godzinę tu na parking?</p>
+            <p>Ziomber: -Pewnie, ale najpierw odpowiesz mi na kilka pytań:</p>
+            <button onclick="continueToStage17()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 17 -->
+        <div id="stage17" class="stage" style="display: none;">
+            <p>(Możesz się pomylić 1 raz)</p>
+            <div id="question1" class="question">
+                <p><img src="image1.jpg" alt="Obrazek pytania 1">1. Czy możesz zatrzymać pojazd pod wiaduktem, jeśli znaki tego nie zabraniają?</p>
+                <button onclick="checkQuestion('q1', 'yes')">Tak</button>
+                <button onclick="checkQuestion('q1', 'no')">Nie</button>
+            </div>
+            <div id="question2" class="question" style="display: none;">
+                <p><img src="image2.jpg" alt="Obrazek pytania 2">2. Czy na drodze za następującym znakiem masz prawo wykonać manewr cofania?</p>
+                <button onclick="checkQuestion('q2', 'yes')">Tak</button>
+                <button onclick="checkQuestion('q2', 'no')">Nie</button>
+            </div>
+            <div id="question3" class="question" style="display: none;">
+                <p><img src="image3.jpg" alt="Obrazek pytania 3">3. Czy w zaprezentowanej sytuacji jesteś zobligowany zrezygnować z wyprzedzania, jeśli kierowca pojazdu poprzedzającego włączył prawy kierunkowskaz?</p>
+                <button onclick="checkQuestion('q3', 'yes')">Tak</button>
+                <button onclick="checkQuestion('q3', 'no')">Nie</button>
+            </div>
+            <div id="question4" class="question" style="display: none;">
+                <p><img src="image4.jpg" alt="Obrazek pytania 4">4. Czy po zabraniu pasażera, chcąc włączyć się do ruchu masz pierwszeństwo przed pojazdem z naprzeciwka, skręcającym w lewo na miejsce postojowe?</p>
+                <button onclick="checkQuestion('q4', 'yes')">Tak</button>
+                <button onclick="checkQuestion('q4', 'no')">Nie</button>
+            </div>
+        </div>
+
+        <!-- Etap 18 (Poprawne odpowiedzi) -->
+        <div id="stage18" class="stage" style="display: none;">
+            <p>Ziomber: -Dobra mordzia, trzymaj klucze. Powodzenia.</p>
+            <p>Odpalasz BMKę, czujesz dziwny zapach. Myślisz sobie, że to pozostałości z palonej gumy i sprzęgła. Radio odpala się na cały regulator. Leci DJ Pierdolony rak wątroby. Nagle widzisz płomienie wydobywające się spod maski. Wychodzisz. Auto eksploduje. Co robisz?</p>
+            <button onclick="handleCarExplosion('truth')">Idziesz do Ziombera od razu powiedzieć mu prawdę (przecież nie mogłeś zjebać mu auta w 15 sekund)</button>
+            <button onclick="handleCarExplosion('lie')">Idziesz do Ziombera i mówisz mu, że jacyś Rumuni podpalili mu auto</button>
+            <button onclick="handleCarExplosion('run')">Nic nie mówisz i spierdalasz z miejsca zdarzenia</button>
+        </div>
+
+        <!-- Etap 18 (Błędne odpowiedzi) -->
+        <div id="stage18_fail" class="stage" style="display: none;">
+            <p>Ziomber: -Nie no chłopie, kto ci dał prawo jazdy. Sorry, ale nie dam ci mojej fury. Trzymaj się. Powodzenia mordeczko.</p>
+            <button onclick="continueToStage19()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 19 -->
+        <div id="stage19" class="stage" style="display: none;">
+            <p>Ty: -Skoro nie samochodem, to trzeba pojechać do Japka śmierdzącą komunikacją. Ale jak do niego teraz dojechać?</p>
+            <input type="text" id="busInput" placeholder="Wpisuj pojedynczo">
+            <button onclick="checkBusNumber()">Submit</button>
+            <button onclick="showHint2()">Podpowiedź</button>
+            <p id="hint2" class="hint" style="display: none;">Ciekawe jakdojadę...</p>
+            <p id="busNumbers"></p>
+        </div>
+
+        <!-- Etap 20 -->
+        <div id="stage20" class="stage" style="display: none;">
+            <p>Wybierasz najszybsze połączenie, bo przecież nie jesteś jebanym debilem. Dojeżdżasz do Japka, dzwonisz domoforem..</p>
+            <button onclick="continueToStage21()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 21 -->
+        <div id="stage21" class="stage" style="display: none;">
+            <p>Nikt nie odbiera, ale na szczęście otwiera Ci jakiś sąsiad bo kretyn pomyślał, że możesz mieszkać w takiej melinie. Wyjeżdżasz na 4 piętro, pukasz, nikt nie odpowiada. Na szczęście dobrze wiesz, że Kuba trzyma zawsze zapasowy klucz pod wycieraczką.</p>
+            <button onclick="continueToStage22()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 22 -->
+        <div id="stage22" class="stage" style="display: none;">
+            <p>Nie ma nikogo w mieszkaniu, ale wiesz po co przyszedłeś. Musisz znaleźć ten telefon. Tylko gdzie on go mógł schować…</p>
+            <button onclick="continueToStage23()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 23 -->
+        <div id="stage23" class="stage" style="display: none;">
+            <p>Musisz znaleźć telefon Saschy w mieszkaniu Kuby. Masz na to 2 minuty inaczej przyjedzie ochrona i możesz pakować się do więzienia. Prawdopodobnie trzyma go w jakimś oczywistym miejscu…</p>
+            <button onclick="startTimer()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 24 -->
+        <div id="stage24" class="stage" style="display: none;">
+            <div id="timer">2:00</div>
+            <button onclick="goStraight()">Idź prosto</button>
+            <button onclick="exitApartment()">Wyjdź z mieszkania</button>
+        </div>
+
+        <!-- Etap 25 (Wyjście z mieszkania) -->
+        <div id="exit-stage" class="stage" style="display: none;">
+            <p>Wyszedłeś z mieszkania. Nie zrezygnowałeś z odnalezienia Saschy.</p>
+            <button onclick="location.reload()">Zacznij od nowa</button>
+        </div>
+
+        <!-- Etap 26 (Środek mieszkania) -->
+        <div id="middle-stage" class="stage" style="display: none;">
+            <p>Jesteś na środku mieszkania Japka</p>
+            <button onclick="goLeft()">Idź w lewo</button>
+            <button onclick="goForward()">Idź do przodu</button>
+            <button onclick="goRight()">Idź w prawo</button>
+        </div>
+
+        <!-- Etap 27 (Biuro Japka) -->
+        <div id="office-stage" class="stage" style="display: none;">
+            <p>Tu jest biuro Japka… może tutaj?</p>
+            <button onclick="checkDesk()">Sprawdź biurko</button>
+            <button onclick="checkBookshelf()">Sprawdź biblioteczkę</button>
+            <button onclick="checkPiano()">Sprawdź pod pianinem</button>
+            <button onclick="returnToMiddle()">Wróć na środek mieszkania</button>
+        </div>
+
+        <!-- Etap 28 (Salon Japka) -->
+        <div id="living-room-stage" class="stage" style="display: none;">
+            <p>To salon Japka.. najpewniej ten telefon jest tutaj</p>
+            <button onclick="checkTVCabinet()">Sprawdź szafkę pod telewizorem</button>
+            <button onclick="checkSofa()">Sprawdź kanapę</button>
+            <button onclick="checkBehindTV()">Sprawdź za telewizorem</button>
+            <button onclick="checkUnderTable()">Sprawdź pod stołem</button>
+            <button onclick="returnToMiddle()">Wróć na środek mieszkania</button>
+        </div>
+
+        <!-- Etap 29 (Kuchnia Japka) -->
+        <div id="kitchen-stage" class="stage" style="display: none;">
+            <p>Jesteś w kuchni Japka</p>
+            <button onclick="checkFridge()">Sprawdź lodówkę</button>
+            <button onclick="checkCabinets()">Sprawdź szafki</button>
+            <button onclick="checkTable()">Sprawdź na stole w kuchni</button>
+            <button onclick="checkCounter()">Sprawdź na blacie</button>
+            <button onclick="returnToMiddle()">Wróć na środek mieszkania</button>
+        </div>
+
+        <!-- Etap 30 (Szafki kuchenne) -->
+        <div id="cabinets-stage" class="stage" style="display: none;">
+            <p>Sprawdź szafki:</p>
+            <button onclick="checkCabinet1()">Sprawdź szafkę 1</button>
+            <button onclick="checkCabinet2()">Sprawdź szafkę 2</button>
+            <button onclick="checkCabinet3()">Sprawdź szafkę 3</button>
+            <button onclick="returnToKitchen()">Wróć do kuchni</button>
+        </div>
+
+        <!-- Etap 31 (Znaleziona kartka) -->
+        <div id="note-stage" class="stage" style="display: none;">
+            <p>Co to za kartka co tutaj jest napisane…</p>
+            <button onclick="continueToStage32()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 32 -->
+        <div id="stage32" class="stage" style="display: none;">
+            <p>Cholera to jakaś kartka, ale co tutaj jest napisane...</p>
+            <button onclick="continueToStage34()">Kontynuuj</button>
+        </div>
+
+        <!-- Etap 34 -->
+        <div id="stage34" class="stage" style="display: none;">
+            <p>Na kartce napisane jest:</p>
+            <p>pxvlvc nrqlhfcqlh xgdf vlh gr ndfsud ndfcrud</p>
+            <input type="text" id="input8" placeholder="Wpisz hasło">
+            <button onclick="checkPassword5()">Submit</button>
+            <button onclick="showHint3()">Podpowiedź</button>
+            <p id="hint3" class="hint" style="display: none;"></p>
+        </div>
+
+        <!-- Koniec gry -->
+        <div id="end-stage" class="stage" style="display: none;">
+            <p>Trzecia część nadchodzi...</p>
+            <button onclick="endGame()">Koniec gry, brawo</button>
+        </div>
+    </div>
+
+    <!-- Kontener na powiadomienia -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
